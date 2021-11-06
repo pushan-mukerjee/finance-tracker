@@ -23,3 +23,6 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+https://mysterious-fortress-50847.herokuapp.com/ | https://git.heroku.com/mysterious-fortress-50847.git
+
