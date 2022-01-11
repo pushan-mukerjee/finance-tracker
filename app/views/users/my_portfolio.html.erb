@@ -21,3 +21,8 @@
 <div id="results">
 
 </div>
+<% if !@tracked_stocks.empty? %>
+  <%= render 'stocks/list' %>
+<% else %>
+  <p>There are currently no stocks listed for this user</p>
+<% end %>
