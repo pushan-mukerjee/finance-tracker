@@ -9,23 +9,19 @@ class UsersController < ApplicationController
 
   def search
      if params[:friend].present?
-       @friend = params[:friend]
-       if @friend
-         #render 'users/my_portfolio'
+       @friends = User.search(params[:friend])
+       @friends = current_user.except_current_user(@friends)
+       if @friends
          respond_to do |format|
-           format.js { render partial: '/users/friend_result' }
+           format.js { render partial: 'users/friend_result' }
          end
        else
-         #flash[:alert] = "Please enter a valid symbol to search"
-         #redirect_to my_portfolio_path
          respond_to do |format|
-           flash.now[:alert] = "Friend does not exist as a user"
+           flash.now[:alert] = "Couldn't find user"
            format.js { render partial: 'users/friend_result' }
          end
        end
      else
-       #flash[:alert] = "Please enter a symbol to search"
-       #redirect_to my_portfolio_path
        respond_to do |format|
          flash.now[:alert] = "Please enter a friend name or email to search"
          format.js { render partial: 'users/friend_result' }

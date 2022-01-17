@@ -28,4 +28,34 @@ class User < ApplicationRecord
       "Anonymous"
   end
 
+  def self.search(searchParameter)
+    searchParameter.strip!
+    to_send_back = (firstNameMatches(searchParameter) + lastNameMatches(searchParameter) + emailMatches(searchParameter)).uniq
+    return nil unless to_send_back
+    to_send_back
+  end
+
+  def self.firstNameMatches(searchParameter)
+     matches('first_name', searchParameter)
+  end
+
+  def self.lastNameMatches(searchParameter)
+     matches('lastname', searchParameter)
+  end
+
+  def self.emailMatches(searchParameter)
+     matches('email', searchParameter)
+  end
+
+  def self.matches(fieldName, searchParameter)
+     where("#{fieldName} like ?", "%#{searchParameter}%")
+  end
+
+  def except_current_user(users)
+    users.reject { |user| user.id == self.id }
+  end
+
+  def not_friends_with?(friendId)
+    !self.friends.where(id: friendId).exists?
+  end
 end
