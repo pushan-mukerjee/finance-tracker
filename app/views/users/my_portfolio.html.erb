@@ -1,7 +1,6 @@
 <h1>My Portfolio</h1>
-
 <div class='search-area'
-  <h3>Search Stocks</h3>
+  <h2>Search Stocks</h2>
   <%= form_tag search_stock_path, remote: true, method: :get do %>
     <div class="form-group row">
       <div class="col-sm-9 no-right-padding">
@@ -15,13 +14,13 @@
     </div>
   <% end %>
 </div>
-<%# <%= render 'users/result' %>
-
 
 <div id="results">
 
 </div>
+
 <% if !@tracked_stocks.empty? %>
+  <p>Hit F5 or Click 'My Portfolio' to refresh the page and update stock prices</p>
   <%= render 'stocks/list' %>
 <% else %>
   <p>There are currently no stocks listed for this user</p>

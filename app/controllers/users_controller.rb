@@ -2,6 +2,11 @@ class UsersController < ApplicationController
   def my_portfolio
     @user = current_user
     @tracked_stocks = current_user.stocks
+    @tracked_stocks.all.each do |stock|
+      updatedStock = Stock.new_lookup(stock.ticker)
+      stock.last_price = updatedStock.last_price
+      stock.save
+    end
   end
 
   def my_friends
@@ -11,6 +16,11 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @tracked_stocks = @user.stocks
+    @tracked_stocks.all.each do |stock|
+      updatedStock = Stock.new_lookup(stock.ticker)
+      stock.last_price = updatedStock.last_price
+      stock.save
+    end
   end
 
   def search
