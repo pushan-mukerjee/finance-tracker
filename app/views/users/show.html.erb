@@ -6,13 +6,15 @@
          <tr>
            <td><strong>Name: </strong> <%= @user.full_name %></td>
            <td><strong>Email: </strong> <%= @user.email %></td>
-           <% if current_user.not_friends_with?(@user.id) %>
-             <td><strong>Actions: </strong>  <%= link_to 'Follow Friend', friendships_path(friend: @user),
-                           class: "btn btn-xs btn-success", method: :post %></td>
-           <% else %>
-             <td><span class="badge badge-primary">
-                You are friends
-             </span></td>
+           <% if !current_user %>
+             <% if current_user.not_friends_with?(@user.id) %>
+               <td><strong>Actions: </strong>  <%= link_to 'Follow Friend', friendships_path(friend: @user),
+                             class: "btn btn-xs btn-success", method: :post %></td>
+             <% else %>
+               <td><span class="badge badge-primary">
+                  You are friends
+               </span></td>
+             <% end %>
            <% end %>
          </tr>
      </tbody>

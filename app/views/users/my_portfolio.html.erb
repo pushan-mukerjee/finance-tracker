@@ -1,4 +1,4 @@
-<h1>My Portfolio</h1>
+<h1><%= link_to 'My Portfolio', my_portfolio_path %></h1>
 <div class='search-area'
   <h2>Search Stocks</h2>
   <%= form_tag search_stock_path, remote: true, method: :get do %>
